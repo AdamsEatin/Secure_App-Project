@@ -29,7 +29,7 @@ if(!isset($_SESSION["authToken"])){
 		from the 1914 translation by H. Rackham.</p>
 		
 		<form>
-			<button formaction="/Welcome.php">Welcome?</button>
+			<button formaction="/Welcome.php">Welcome</button>
 			<button formaction="/Lorem.php">Why?</button>
 			<button formaction="/Index.php">Logout</button>
 		</form>

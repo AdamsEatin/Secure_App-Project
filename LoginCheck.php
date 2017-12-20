@@ -15,7 +15,9 @@ $databasename = "app_db";
 
 $conn = new mysqli($servername, $username, $password, $databasename);//new msql connection
 
-$user = $_POST["username"];
+
+$uValue = $_POST["username"];
+$user = htmlspecialchars($uValue);
 $pword = $_POST["password"];
 
 $salt = uniqid(mt_rand(), true);//generate random salt
