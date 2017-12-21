@@ -23,7 +23,7 @@ unset($_SESSION["uName"]);
 		
 		<meta charset="ISO-8859-1">
 		<title>Secure App : Register</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="main_page.css">
 	</head>
 	
 	<body>

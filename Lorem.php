@@ -13,7 +13,7 @@ if(!isset($_SESSION["authToken"])){
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Secure App : Why? </title>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="main_page.css">
 	</head>
 	
 	<body>

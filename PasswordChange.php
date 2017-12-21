@@ -25,7 +25,7 @@ if(!isset($_SESSION["authToken"])){
 		
 		<meta charset="ISO-8859-1">
 		<title>Secure App : Password Change</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="main_page.css">
 	</head>
 	
 	<body>
@@ -43,7 +43,7 @@ if(!isset($_SESSION["authToken"])){
 			}
 		?>  
 		<form name= "pwForm" action="PasswordCheck.php" method="POST">
-			<label><b>New Password</b></label><br>
+			<label><b>New Password</b></label>
 			<input type="password" name="newPass" placeholder="Enter New Password" required><br><br>
 	
 			<input type="submit" value="Submit" onclick="return validatePassword()">

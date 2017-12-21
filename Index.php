@@ -9,7 +9,7 @@ unset($_SESSION["authToken"]);
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Secure App : Login </title>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="main_page.css">
 	</head>
 	
 	<body>
@@ -20,7 +20,7 @@ unset($_SESSION["authToken"]);
 				if(isset($_SESSION["uName"])){
 					$error = $_SESSION["error"];
 					$user = $_SESSION["uName"];
-					echo "<h3>Account:$user - $error</h3>";
+					echo "<h3>Account:$user<br> $error</h3>";
 				}else{
 					$error = $_SESSION["error"];
 					echo "<h3>$error</h3>";
@@ -29,10 +29,10 @@ unset($_SESSION["authToken"]);
 		?>  
 		
 		<form action="LoginCheck.php" method="POST">
-			<label><b>Username</b></label><br>
+			<label><b>Username</b></label>
 			<input type="text" name="username" placeholder="Enter Username" required><br><br>
 	
-			<label><b>Password</b></label><br>
+			<label><b>Password</b></label>
 			<input type="password" name="password" placeholder="Enter Password" required><br><br>
 	
 			<input type="submit" name="submit" value="Submit">
