@@ -13,8 +13,6 @@ $uValue = $_POST["username"];
 $user = htmlspecialchars($uValue);
 $pword = $_POST["password"];
 
-$salt = uniqid(mt_rand(), true);//generate random salt
-
 $selectSQL = "SELECT * FROM user_db WHERE username='$user'"; //SQL query to get users with the same username
 
 if($conn->connect_error){//if connection error returns a message as such
