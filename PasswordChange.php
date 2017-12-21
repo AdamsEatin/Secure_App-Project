@@ -12,7 +12,7 @@ if(!isset($_SESSION["authToken"])){
 	<head>
 		<script>
 		function validatePassword(){
-			var regexCheck = new pwExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
+			var regexCheck = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 			var pass = document.forms["pwForm"]["newPass"].value;
 			if(regexCheck.test(pass)){
 				return true;
@@ -68,9 +68,9 @@ if(!isset($_SESSION["authToken"])){
 		?>  
 		<form name= "pwForm" action="PasswordCheck.php" method="POST">
 			<label><b>New Password</b></label>
-			<input type="password" name="newPass" placeholder="Enter New Password" required><br><br>
+			<input type="password" name="newPass" placeholder="New Password" required><br><br>
 	
-			<input type="button" value="Submit" onclick="return validatePassword()">
+			<input type="submit" value="Submit" onclick="return validatePassword()">
 			<a href = "/Welcome.php">
 			<input type="button" value="Back">
 		</form>
