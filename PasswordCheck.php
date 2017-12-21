@@ -1,7 +1,7 @@
 <?php
 if(!isset($_SESSION["authToken"])){
-	$authError = "Error in receiving Authorization Token";
-	$_SESSION["error"] = $authError;
+	$errorC = 0;
+	$_SESSION["errorCode"] = $errorC;
 	header("location: Index.php");
 }
 
@@ -16,9 +16,6 @@ $conn = new mysqli($servername, $username, $password, $databasename);
 
 $user = $_SESSION["uName"];
 $newPword = $_POST["newPass"];
-
-//salt paassword
-//$saltedPword = crypt($pword, $salt);
 
 //SQL query to get users with the same username
 $checkSQL = "SELECT * FROM user_db WHERE username='$user'"; 
@@ -35,21 +32,15 @@ if(($result=$conn->query($checkSQL)) !== FALSE){
 	$updateSQL = "UPDATE user_db SET password='$newSaltedPword' WHERE username='$user'";
 	
 	if($conn->query($updateSQL) == TRUE){
-		$passChange = "Password changed successfully.";
-		$_SESSION["error"] = $passChange;
+		$errorC = 7;
+		$_SESSION["errorCode"] = $errorC;
 		header("Location:Index.php");
 	}
 	else{
-		$err = "Updating Password failed";
-		$_SESSION["error"] = $err;
+		$errorC = 8;
+		$_SESSION["errorCode"] = $errorC;
 		header("Location:PasswordChange.php");
 	}	
 }
-else{
-	$errorMsg = "Old Password does not match stored password.";
-	$_SESSION["error"] = $errorMsg;
-	header("Location:PasswordChange.php");
-}
-
 $conn->close();	
 ?>

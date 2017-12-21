@@ -1,8 +1,8 @@
 <?php
 session_start();
 if(!isset($_SESSION["authToken"])){
-	$authError = "Error in receiving Authorization Token";
-	$_SESSION["error"] = $authError;
+	$errorC = 0;
+	$_SESSION["errorCode"] = $errorC;
 	header("location: Index.php");
 }
 ?>

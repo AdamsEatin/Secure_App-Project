@@ -1,8 +1,8 @@
 <?php
 session_start();
 if(!isset($_SESSION["authToken"])){
-	$authError = "Error in receiving Authorization Token";
-	$_SESSION["error"] = $authError;
+	$errorC = 0;
+	$_SESSION["errorCode"] = $errorC;
 	header("location: Index.php");
 }
 ?>
@@ -23,7 +23,7 @@ if(!isset($_SESSION["authToken"])){
 		}
 		</script>
 		
-		<meta charset="ISO-8859-1">
+		<meta charset="UTF-8">
 		<title>Secure App : Password Change</title>
 		<link rel="stylesheet" type="text/css" href="main_page.css">
 	</head>
@@ -32,9 +32,38 @@ if(!isset($_SESSION["authToken"])){
 		<h1>Password Change</h1>
 		<h2>Please enter the your new password below.</h2>
 		<?php
-			if(isset($_SESSION["error"])){
-				$error = $_SESSION["error"];
-				echo "<h3>$error</h3><br>$saltedOldP<br>";
+			if(isset($_SESSION["errorCode"])){
+				$errC = $_SESSION["errorCode"];
+				switch($errC){
+					case 0:
+						echo "<h3>Error receiving Authorized Token</h3>";
+						break;
+					case 1:
+						$user = $_SESSION["uName"];
+						echo "<h3>Account: $user<br>Failed to authenticate username and password at this time.<br>Lockout will occur after 3 failed attempts.</h3>";
+						break;
+					case 2:
+						echo "<h3>This account is currently locked out.</h3>";
+						break;
+					case 3:
+						echo "<h3>Username not recognized.</h3>";
+						break;
+					case 4:
+						echo "<h3>This should not have happened...</h3>";
+						break;
+					case 5:
+						echo "<h3>Account successfully registered!<br>Please login to continue.</h3>";
+						break;
+					case 6:
+						echo "<h3>Username already present.</h3>";
+						break;
+					case 7:
+						echo "<h3>Password changed successfully.<br>Please login with your new password to re-authenticate.</h3>";
+						break;
+					case 8:
+						echo "<h3>Updating password has failed.</h3>";
+						break;
+				}
 			}
 		?>  
 		<form name= "pwForm" action="PasswordCheck.php" method="POST">

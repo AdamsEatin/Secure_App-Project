@@ -1,8 +1,8 @@
 <?php
 session_start();
 if(!isset($_SESSION["authToken"])){
-	$authError = "Error in receiving Authorization Token";
-	$_SESSION["error"] = $authError;
+	$errorC = 0;
+	$_SESSION["errorCode"] = $errorC;
 	header("location: Index.php");
 }
 ?>
@@ -11,7 +11,7 @@ if(!isset($_SESSION["authToken"])){
 <html>
 
 	<head>
-		<meta charset="ISO-8859-1">
+		<meta charset="UTF-8">
 		<title>Secure App : Why? </title>
 		<link rel="stylesheet" type="text/css" href="main_page.css">
 	</head>

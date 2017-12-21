@@ -1,10 +1,4 @@
 <?php
-unset($_SESSION["authToken"]);
-if(!isset($_SESSION["authToken"])){
-	$authError = "Error in receiving Authorization Token";
-	$_SESSION["error"] = $authError;
-	header("location: Index.php");
-}
 date_default_timezone_set("UTC");
 session_start();
 
@@ -64,8 +58,8 @@ if(($result=$conn->query($selectSQL)) !== FALSE){
 				
 				//Attempt to update failed login count + last failed attemptt
 				if($conn->query($sql2) == TRUE){
-					$authError = "Failed to authenticate username and password.\nLockout will occur at 3 failed attempts.";
-					$_SESSION["error"] = $authError;
+					$errorC = 1;
+					$_SESSION["errorCode"] = $errorC;
 					$_SESSION["uName"] = $user;
 					header("Location:Index.php");
 				}
@@ -94,8 +88,8 @@ if(($result=$conn->query($selectSQL)) !== FALSE){
 					//Attempt to update failed login count + last failed attemptt
 					if($conn->query($sql2) == TRUE){
 						//$updateRow = $updateRes->fetch_assoc();
-						$authError = "Failed to authenticate username and password.\nLockout will occur at 3 failed attempts.";
-						$_SESSION["error"] = $authError;
+						$errorC = 1;
+						$_SESSION["errorCode"] = $errorC;
 						$_SESSION["uName"] = $user;
 						header("Location:Index.php");
 					}					
@@ -105,21 +99,19 @@ if(($result=$conn->query($selectSQL)) !== FALSE){
 			//Otherwise account is locked
 			else{
 				//Return locked out
-				$lockoutError = "Account is currently locked out.";
-				$_SESSION["error"] = $lockoutError;
-				$_SESSION["uName"] = $user;
+				$errorC = 2;
+				$_SESSION["errorCode"] = $errorC;
 				header("Location:Index.php");
 			}
 		}
 	}else{
-		$error = "Username not recognised within the database.";
-		$_SESSION["error"] = $error;
-		$_SESSION["uName"] = $user;
+		$errorC = 3;
+		$_SESSION["errorCode"] = $errorC;
 		header("Location:Index.php");
 	}
 }else{
-	$error = "Shits all sort of fucked yo.";
-	$_SESSION["error"] = $error;
+	$errorC = 4;
+	$_SESSION["errorCode"] = $errorC;
 	header("Location:Index.php");
 }
 $conn->close();
