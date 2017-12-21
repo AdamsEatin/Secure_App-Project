@@ -17,7 +17,7 @@ if(!isset($_SESSION["authToken"])){
 	</head>
 	
 	<body>
-		<h3>Why do we use it?</h3>
+		<h1>Why do we use it?</h1>
 		<p>"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.<br>
 		The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,<br> 
 		content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum<br> 
