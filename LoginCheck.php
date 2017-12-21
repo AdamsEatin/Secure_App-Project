@@ -15,7 +15,6 @@ $databasename = "app_db";
 
 $conn = new mysqli($servername, $username, $password, $databasename);//new msql connection
 
-
 $uValue = $_POST["username"];
 $user = htmlspecialchars($uValue);
 $pword = $_POST["password"];

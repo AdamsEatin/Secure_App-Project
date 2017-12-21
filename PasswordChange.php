@@ -30,24 +30,20 @@ if(!isset($_SESSION["authToken"])){
 	
 	<body>
 		<h1>Password Change</h1>
-		<h2>Please enter password details below to change</h2>
+		<h2>Please enter the your new password below.</h2>
 		<?php
 			if(isset($_SESSION["error"])){
 				$error = $_SESSION["error"];
-				$saltedOldP = $_SESSION["old"];
 				echo "<h3>$error</h3><br>$saltedOldP<br>";
-			}
-			if(isset($_SESSION["uName"])){
-				$user = $_SESSION["uName"];
-				echo "<span>$user</span>";
 			}
 		?>  
 		<form name= "pwForm" action="PasswordCheck.php" method="POST">
 			<label><b>New Password</b></label>
 			<input type="password" name="newPass" placeholder="Enter New Password" required><br><br>
 	
-			<input type="submit" value="Submit" onclick="return validatePassword()">
-			<button formaction="/Welcome.php">Back</button>
+			<input type="button" value="Submit" onclick="return validatePassword()">
+			<a href = "/Welcome.php">
+			<input type="button" value="Back">
 		</form>
 	</body>
 </html>
