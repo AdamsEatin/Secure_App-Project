@@ -1,7 +1,31 @@
 <?php
 session_start();
-unset($_SESSION["authToken"]);
-unset($_SESSION["uName"]);
+
+if(isset($_SESSION["Session_ID"])){
+	$sesh_id = $_SESSION["Session_ID"];
+	
+	//Removing sessionID from auth DB 
+	//to prevent going back to restricted pages
+	$servername = "localhost";
+	$username = "root";
+	$password = "secret";
+	$databasename = "app_db";
+	$conn = new mysqli($servername, $username, $password, $databasename);
+	
+	$sesh_id = $_SESSION["Session_ID"];
+	$auth_check = "DELETE FROM `auth_db` WHERE `session_id` = '$sesh_id'";
+	$conn->query($auth_check);
+	
+}else{
+	$ip = $_SERVER['REMOTE_ADDR'];
+	$user_agent = $_SERVER['HTTP_USER_AGENT'];
+	$str = $ip . " " . $user_agent;
+	
+	$salt = uniqid(mt_rand(), true);
+	$s_id = crypt($str, $salt);
+	$_SESSION["Session_ID"] = $s_id;
+	$sesh_id = $_SESSION["Session_ID"];
+}
 ?>
 
 
@@ -33,33 +57,14 @@ unset($_SESSION["uName"]);
 			if(isset($_SESSION["errorCode"])){
 				$errC = $_SESSION["errorCode"];
 				switch($errC){
-					case 0:
-						echo "<h3>Error receiving Authorized Token</h3>";
-						break;
 					case 1:
-						$user = $_SESSION["uName"];
-						echo "<h3>Account: $user<br>Failed to authenticate username and password at this time.<br>Lockout will occur after 3 failed attempts.</h3>";
-						break;
-					case 2:
-						echo "<h3>This account is currently locked out.</h3>";
-						break;
-					case 3:
-						echo "<h3>Username not recognized.</h3>";
-						break;
-					case 4:
-						echo "<h3>This should not have happened...</h3>";
-						break;
-					case 5:
 						echo "<h3>Account successfully registered!<br>Please login to continue.</h3>";
 						break;
-					case 6:
+					case 2:
 						echo "<h3>Username already present.</h3>";
 						break;
-					case 7:
-						echo "<h3>Password changed successfully.<br>Please login with your new password to re-authenticate.</h3>";
-						break;
-					case 8:
-						echo "<h3>Updating password has failed.</h3>";
+					case 3:
+						echo "<h3>Surprise! It's an error.</h3>";
 						break;
 				}
 			}
